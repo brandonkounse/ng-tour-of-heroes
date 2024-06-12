@@ -10,25 +10,15 @@ import { MessageService } from '../message.service';
   styleUrl: './heroes.component.css'
 })
 export class HeroesComponent implements OnInit {
-  private heroes: Hero[] = [];
-  public selectedHero?: Hero;
+  heroes: Hero[] = [];
 
-  constructor(private heroService: HeroService, private messageService: MessageService) { }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
-    this.setHeroes();
+    this.getHeroes();
   }
 
-  public onSelect(hero: Hero) {
-    this.selectedHero = hero;
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-  }
-
-  public getHeroes(): Hero[] {
-    return this.heroes;
-  }
-
-  private setHeroes(): void {
+  public getHeroes(): void {
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
   }
 }
